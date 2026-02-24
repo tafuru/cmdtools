@@ -74,6 +74,7 @@ jobs:
           command -v delta
           command -v difi
           command -v ghq
+          command -v zellij
 
       - name: Verify Homebrew packages
         if: runner.os == 'macOS'
@@ -91,6 +92,7 @@ jobs:
           command -v mise
           command -v ghq
           command -v nvim
+          command -v zellij
 
       - name: Test idempotency (re-run install.sh)
         if: matrix.install-method == 'clone'

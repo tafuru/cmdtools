@@ -97,6 +97,17 @@ install_ghq() {
   success "ghq installed"
 }
 
+# zellij — https://github.com/zellij-org/zellij
+install_zellij() {
+  command -v zellij &>/dev/null && { skip zellij; return; }
+  info "Installing zellij"
+  local tag; tag=$(gh_latest zellij-org/zellij)
+  local ver="${tag#v}"
+  curl -sSfL "https://github.com/zellij-org/zellij/releases/download/${tag}/zellij-x86_64-unknown-linux-musl.tar.gz" \
+    | tar -xz -C "$BIN_DIR" zellij
+  success "zellij installed"
+}
+
 install_chezmoi
 install_zoxide
 install_sheldon
@@ -105,5 +116,6 @@ install_mise
 install_delta
 install_difi
 install_ghq
+install_zellij
 
 success "All extras installed to $BIN_DIR"

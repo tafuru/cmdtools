@@ -26,3 +26,6 @@ brew "difi"
 
 # Editor
 brew "neovim"
+
+# Terminal multiplexer
+brew "zellij"

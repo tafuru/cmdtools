@@ -22,6 +22,7 @@ CLI tools installer for macOS and Linux. Sets up a zsh environment with modern c
 | [`sheldon`](https://github.com/rossmacarthur/sheldon) | zsh plugin manager |
 | [`mise`](https://mise.jdx.dev) | Runtime version manager |
 | [`neovim`](https://neovim.io) | Text editor |
+| [`zellij`](https://zellij.dev) | Terminal multiplexer |
 
 ## Installation
 

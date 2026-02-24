@@ -41,7 +41,7 @@ install_eza() {
   info "Installing eza"
   local tag; tag=$(gh_latest eza-community/eza)
   curl -sSfL "https://github.com/eza-community/eza/releases/download/${tag}/eza_x86_64-unknown-linux-musl.tar.gz" \
-    | tar -xz -C "$BIN_DIR" eza
+    | tar -xz -C "$BIN_DIR" ./eza
   success "eza installed"
 }
 

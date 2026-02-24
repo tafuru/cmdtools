@@ -44,7 +44,6 @@ On macOS, packages are installed via Homebrew. On Linux, apt handles packages av
 
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
 - Linux uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
-- `mise` is configured per-project via `mise.toml`, not globally
 
 ## License
 

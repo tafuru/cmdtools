@@ -10,8 +10,14 @@ success() { echo "[cmdtools] ✓ $*"; }
 warn()    { echo "[cmdtools] ! $*" >&2; }
 fatal()   { echo "[cmdtools] ✗ $*" >&2; exit 1; }
 
-# When run via curl (no platform/ dir), fetch platform files from GitHub
-if [ ! -d "$SCRIPT_DIR/platform" ]; then
+case "$OS" in
+  Darwin) PLATFORM_FILE="$SCRIPT_DIR/platform/macos/Brewfile" ;;
+  Linux)  PLATFORM_FILE="$SCRIPT_DIR/platform/linux/packages.txt" ;;
+  *)      fatal "Unsupported OS: $OS" ;;
+esac
+
+# When run via curl (platform file not present), fetch from GitHub
+if [ ! -f "$PLATFORM_FILE" ]; then
   info "No local repository detected — fetching platform files"
   SCRIPT_DIR=$(mktemp -d)
   BASE="https://raw.githubusercontent.com/tafuru/cmdtools/main"

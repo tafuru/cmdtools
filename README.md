@@ -51,7 +51,8 @@ On macOS, packages are installed via Homebrew. On Linux, apt handles packages av
 
 ## Related
 
-For a full machine setup including dotfiles, see [dev-setup](https://github.com/tafuru/dev-setup).
+- [dev-setup](https://github.com/tafuru/dev-setup) — Full machine setup (entry point)
+- [devtools](https://github.com/tafuru/devtools) — GUI apps and fonts
 
 ## License
 

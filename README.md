@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/tafuru/cmdtools/actions/workflows/ci.yml/badge.svg)](https://github.com/tafuru/cmdtools/actions/workflows/ci.yml)
 
-CLI tools installer for macOS and Linux. Sets up a zsh environment with modern command-line tools.
+CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with modern command-line tools.
 
 ## Tools
 
@@ -40,12 +40,12 @@ cd cmdtools
 bash install.sh
 ```
 
-On macOS, packages are installed via Homebrew. On Linux, apt handles packages available in the standard repositories; the rest are installed from official release binaries to `~/.local/bin`.
+On macOS, packages are installed via Homebrew. On Ubuntu/Debian, apt handles packages available in the standard repositories; the rest are installed from official release binaries to `~/.local/bin`.
 
 ## Design Principles
 
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
-- Linux uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
+- Ubuntu/Debian uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
 - Use mise (not Homebrew) for runtimes such as Rust, Node.js, Python — mise supports per-project version management via `.mise.toml`
 - mise itself is installed by cmdtools, but runtimes are not — define them in `~/.config/mise/config.toml`; [dev-setup](https://github.com/tafuru/dev-setup) runs `mise install` automatically as the final step, or run it manually if setting up without dev-setup
 

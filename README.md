@@ -45,7 +45,7 @@ On macOS, packages are installed via Homebrew. On Linux, apt handles packages av
 
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
 - Linux uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
-- Use mise (not Homebrew) for runtimes such as Bun, Rust, Node.js, Python — mise supports per-project version management via `.mise.toml`
+- Use mise (not Homebrew) for runtimes such as Rust, Node.js, Python — mise supports per-project version management via `.mise.toml`
 - mise itself is installed by cmdtools, but runtimes are not — define them in `~/.config/mise/config.toml` and run `mise install` manually after setup
 
 ## Related

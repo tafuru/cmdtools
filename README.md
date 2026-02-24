@@ -2,7 +2,7 @@
 
 [![CI](https://github.com/tafuru/cmdtools/actions/workflows/ci.yml/badge.svg)](https://github.com/tafuru/cmdtools/actions/workflows/ci.yml)
 
-CLI tools installer for macOS and Linux.
+CLI tools installer for macOS and Linux. Sets up a zsh environment with modern command-line tools.
 
 ## Tools
 

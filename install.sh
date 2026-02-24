@@ -58,6 +58,11 @@ case "$OS" in
       fi
     done < "$SCRIPT_DIR/platform/linux/packages.txt"
     success "All apt packages processed"
+    if [ "$SHELL" != "$(which zsh)" ]; then
+      info "Setting zsh as default shell"
+      sudo chsh -s "$(which zsh)" "$USER"
+      success "Default shell set to zsh"
+    fi
     bash "$SCRIPT_DIR/platform/linux/extras.sh"
     ;;
   *)

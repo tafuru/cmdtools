@@ -46,6 +46,10 @@ On macOS, packages are installed via Homebrew. On Linux, apt handles packages av
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
 - Linux uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
 
+## Related
+
+For a full machine setup including dotfiles, see [dev-setup](https://github.com/tafuru/dev-setup).
+
 ## License
 
 This repository is licensed under the MIT License. See [LICENSE](LICENSE) for details.

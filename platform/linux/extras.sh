@@ -9,6 +9,14 @@ mkdir -p "$BIN_DIR"
 info()    { echo "[cmdtools] $*"; }
 success() { echo "[cmdtools] ✓ $*"; }
 skip()    { echo "[cmdtools] - $* already installed — skipping"; }
+warn()    { echo "[cmdtools] ! $*" >&2; }
+
+# Architecture detection
+case "$(uname -m)" in
+  x86_64)  ARCH=x86_64 ;;
+  aarch64) ARCH=aarch64 ;;
+  *)       warn "Unsupported architecture: $(uname -m) — falling back to x86_64"; ARCH=x86_64 ;;
+esac
 
 # Fetch the latest release tag from GitHub (returns e.g. "v1.2.3")
 gh_latest() {
@@ -38,7 +46,7 @@ install_sheldon() {
   info "Installing sheldon"
   local tag; tag=$(gh_latest rossmacarthur/sheldon)
   local ver="${tag#v}"
-  curl -sSfL "https://github.com/rossmacarthur/sheldon/releases/download/${tag}/sheldon-${ver}-x86_64-unknown-linux-musl.tar.gz" \
+  curl -sSfL "https://github.com/rossmacarthur/sheldon/releases/download/${tag}/sheldon-${ver}-${ARCH}-unknown-linux-musl.tar.gz" \
     | tar -xz -C "$BIN_DIR" sheldon
   success "sheldon installed"
 }
@@ -48,7 +56,7 @@ install_eza() {
   command -v eza &>/dev/null && { skip eza; return; }
   info "Installing eza"
   local tag; tag=$(gh_latest eza-community/eza)
-  curl -sSfL "https://github.com/eza-community/eza/releases/download/${tag}/eza_x86_64-unknown-linux-musl.tar.gz" \
+  curl -sSfL "https://github.com/eza-community/eza/releases/download/${tag}/eza_${ARCH}-unknown-linux-musl.tar.gz" \
     | tar -xz -C "$BIN_DIR" ./eza
   success "eza installed"
 }
@@ -67,8 +75,12 @@ install_delta() {
   info "Installing delta"
   local tag; tag=$(gh_latest dandavison/delta)
   local ver="${tag#v}"
-  curl -sSfL "https://github.com/dandavison/delta/releases/download/${tag}/delta-${ver}-x86_64-unknown-linux-musl.tar.gz" \
-    | tar -xz --strip-components=1 -C "$BIN_DIR" "delta-${ver}-x86_64-unknown-linux-musl/delta"
+  local triple; case "$ARCH" in
+    aarch64) triple="aarch64-unknown-linux-gnu" ;;
+    *)       triple="x86_64-unknown-linux-musl" ;;
+  esac
+  curl -sSfL "https://github.com/dandavison/delta/releases/download/${tag}/delta-${ver}-${triple}.tar.gz" \
+    | tar -xz --strip-components=1 -C "$BIN_DIR" "delta-${ver}-${triple}/delta"
   success "delta installed"
 }
 
@@ -78,7 +90,8 @@ install_difi() {
   info "Installing difi"
   local tag; tag=$(gh_latest oug-t/difi)
   local ver="${tag#v}"
-  curl -sSfL "https://github.com/oug-t/difi/releases/download/${tag}/difi_Linux_x86_64.tar.gz" \
+  local difi_arch; case "$ARCH" in aarch64) difi_arch=arm64 ;; *) difi_arch=x86_64 ;; esac
+  curl -sSfL "https://github.com/oug-t/difi/releases/download/${tag}/difi_Linux_${difi_arch}.tar.gz" \
     | tar -xz -C "$BIN_DIR" difi
   success "difi installed"
 }
@@ -89,10 +102,11 @@ install_ghq() {
   info "Installing ghq"
   local tag; tag=$(gh_latest x-motemen/ghq)
   local tmp; tmp=$(mktemp -d)
-  curl -sSfL "https://github.com/x-motemen/ghq/releases/download/${tag}/ghq_linux_amd64.zip" \
+  local ghq_arch; case "$ARCH" in aarch64) ghq_arch=arm64 ;; *) ghq_arch=amd64 ;; esac
+  curl -sSfL "https://github.com/x-motemen/ghq/releases/download/${tag}/ghq_linux_${ghq_arch}.zip" \
     -o "$tmp/ghq.zip"
   unzip -q "$tmp/ghq.zip" -d "$tmp"
-  cp "$tmp/ghq_linux_amd64/ghq" "$BIN_DIR/ghq"
+  cp "$tmp/ghq_linux_${ghq_arch}/ghq" "$BIN_DIR/ghq"
   rm -rf "$tmp"
   success "ghq installed"
 }
@@ -103,7 +117,7 @@ install_zellij() {
   info "Installing zellij"
   local tag; tag=$(gh_latest zellij-org/zellij)
   local ver="${tag#v}"
-  curl -sSfL "https://github.com/zellij-org/zellij/releases/download/${tag}/zellij-x86_64-unknown-linux-musl.tar.gz" \
+  curl -sSfL "https://github.com/zellij-org/zellij/releases/download/${tag}/zellij-${ARCH}-unknown-linux-musl.tar.gz" \
     | tar -xz -C "$BIN_DIR" zellij
   success "zellij installed"
 }

@@ -24,6 +24,14 @@ CLI tools installer for macOS and Linux.
 
 ## Installation
 
+Without cloning (recommended):
+
+```bash
+bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/main/install.sh)"
+```
+
+Or clone and run:
+
 ```bash
 git clone https://github.com/tafuru/cmdtools.git
 cd cmdtools

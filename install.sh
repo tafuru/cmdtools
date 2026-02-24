@@ -3,11 +3,24 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 OS="$(uname -s)"
+TMPDIR_CLEANUP=false
 
 info()    { echo "[cmdtools] $*"; }
 success() { echo "[cmdtools] ✓ $*"; }
 warn()    { echo "[cmdtools] ! $*" >&2; }
 fatal()   { echo "[cmdtools] ✗ $*" >&2; exit 1; }
+
+# When run via curl (no platform/ dir), fetch platform files from GitHub
+if [ ! -d "$SCRIPT_DIR/platform" ]; then
+  info "No local repository detected — fetching platform files"
+  SCRIPT_DIR=$(mktemp -d)
+  BASE="https://raw.githubusercontent.com/tafuru/cmdtools/main"
+  mkdir -p "$SCRIPT_DIR/platform/macos" "$SCRIPT_DIR/platform/linux"
+  curl -sSfL "$BASE/platform/macos/Brewfile"         -o "$SCRIPT_DIR/platform/macos/Brewfile"
+  curl -sSfL "$BASE/platform/linux/packages.txt"     -o "$SCRIPT_DIR/platform/linux/packages.txt"
+  curl -sSfL "$BASE/platform/linux/extras.sh"        -o "$SCRIPT_DIR/platform/linux/extras.sh"
+  TMPDIR_CLEANUP=true
+fi
 
 case "$OS" in
   Darwin)
@@ -37,3 +50,7 @@ case "$OS" in
     fatal "Unsupported OS: $OS"
     ;;
 esac
+
+if [ "$TMPDIR_CLEANUP" = true ]; then
+  rm -rf "$SCRIPT_DIR"
+fi

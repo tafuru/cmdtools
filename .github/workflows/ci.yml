@@ -33,7 +33,7 @@ jobs:
         uses: nick-fields/retry@v3
         with:
           timeout_minutes: 30
-          max_attempts: 3
+          max_attempts: 5
           command: bash install.sh
 
       - name: Run install.sh (curl mode)
@@ -43,7 +43,7 @@ jobs:
           CMDTOOLS_BRANCH: ${{ github.head_ref || github.ref_name }}
         with:
           timeout_minutes: 30
-          max_attempts: 3
+          max_attempts: 5
           command: |
             BRANCH="${{ github.head_ref || github.ref_name }}"
             bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"

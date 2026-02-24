@@ -56,7 +56,11 @@ install_eza() {
   command -v eza &>/dev/null && { skip eza; return; }
   info "Installing eza"
   local tag; tag=$(gh_latest eza-community/eza)
-  curl -sSfL "https://github.com/eza-community/eza/releases/download/${tag}/eza_${ARCH}-unknown-linux-musl.tar.gz" \
+  local eza_triple; case "$ARCH" in
+    aarch64) eza_triple="aarch64-unknown-linux-gnu" ;;
+    *)       eza_triple="x86_64-unknown-linux-musl" ;;
+  esac
+  curl -sSfL "https://github.com/eza-community/eza/releases/download/${tag}/eza_${eza_triple}.tar.gz" \
     | tar -xz -C "$BIN_DIR" ./eza
   success "eza installed"
 }

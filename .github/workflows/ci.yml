@@ -23,6 +23,8 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         install-method: [clone, curl]
+    env:
+      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     steps:
       - uses: actions/checkout@v4

@@ -51,6 +51,7 @@ jobs:
       - name: Verify apt packages
         if: runner.os == 'Linux'
         run: |
+          command -v zsh
           command -v git
           command -v curl
           command -v wget

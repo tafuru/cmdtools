@@ -1,3 +1,6 @@
+# Shell
+zsh
+
 # Core CLI tools
 git
 curl

@@ -1,0 +1,14 @@
+# Core CLI tools
+git
+curl
+wget
+unzip
+ripgrep
+fd-find
+fzf
+
+# File viewers
+bat
+
+# Editor
+neovim

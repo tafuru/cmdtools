@@ -23,10 +23,6 @@ jobs:
       matrix:
         os: [ubuntu-latest, macos-latest]
         install-method: [clone, curl]
-    env:
-      HOMEBREW_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      HOMEBREW_GITHUB_PACKAGES_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      HOMEBREW_GITHUB_PACKAGES_USER: ${{ github.actor }}
 
     steps:
       - uses: actions/checkout@v4
@@ -34,15 +30,23 @@ jobs:
 
       - name: Run install.sh (clone mode)
         if: matrix.install-method == 'clone'
-        run: bash install.sh
+        uses: nick-fields/retry@v3
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: bash install.sh
 
       - name: Run install.sh (curl mode)
         if: matrix.install-method == 'curl'
+        uses: nick-fields/retry@v3
         env:
           CMDTOOLS_BRANCH: ${{ github.head_ref || github.ref_name }}
-        run: |
-          BRANCH="${{ github.head_ref || github.ref_name }}"
-          bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          command: |
+            BRANCH="${{ github.head_ref || github.ref_name }}"
+            bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"
 
       - name: Add ~/.local/bin to PATH
         if: runner.os == 'Linux'

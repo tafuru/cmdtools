@@ -11,77 +11,29 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Install shellcheck
-        run: sudo apt-get install -y shellcheck
-
       - name: Run shellcheck
         run: |
           shellcheck install.sh
           shellcheck platform/linux/extras.sh
 
-  test-clone:
+  test:
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
         os: [ubuntu-latest, macos-latest]
+        install-method: [clone, curl]
 
     steps:
       - uses: actions/checkout@v4
+        if: matrix.install-method == 'clone'
 
       - name: Run install.sh (clone mode)
+        if: matrix.install-method == 'clone'
         run: bash install.sh
 
-      - name: Add ~/.local/bin to PATH
-        if: runner.os == 'Linux'
-        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
-
-      - name: Verify apt packages
-        if: runner.os == 'Linux'
-        run: |
-          command -v git
-          command -v curl
-          command -v wget
-          command -v rg
-          command -v fzf
-          command -v nvim
-
-      - name: Verify extras
-        if: runner.os == 'Linux'
-        run: |
-          command -v zoxide
-          command -v sheldon
-          command -v eza
-          command -v mise
-          command -v delta
-          command -v difi
-          command -v ghq
-
-      - name: Verify Homebrew packages
-        if: runner.os == 'macOS'
-        run: |
-          command -v git
-          command -v fzf
-          command -v rg
-          command -v zoxide
-          command -v sheldon
-          command -v eza
-          command -v bat
-          command -v delta
-          command -v difi
-          command -v mise
-          command -v ghq
-          command -v nvim
-
-  test-curl:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        os: [ubuntu-latest, macos-latest]
-
-    steps:
       - name: Run install.sh (curl mode)
+        if: matrix.install-method == 'curl'
         run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/main/install.sh)"
 
       - name: Add ~/.local/bin to PATH
@@ -124,3 +76,7 @@ jobs:
           command -v mise
           command -v ghq
           command -v nvim
+
+      - name: Test idempotency (re-run install.sh)
+        if: matrix.install-method == 'clone'
+        run: bash install.sh

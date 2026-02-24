@@ -8,6 +8,7 @@ CLI tools installer for macOS and Linux.
 
 | Tool | Description |
 |---|---|
+| [`chezmoi`](https://chezmoi.io) | Dotfiles manager |
 | [`git`](https://git-scm.com) | Version control |
 | [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
 | [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |

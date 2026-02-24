@@ -16,6 +16,14 @@ gh_latest() {
     | grep '"tag_name"' | head -1 | sed 's/.*"tag_name": *"\(.*\)".*/\1/'
 }
 
+# chezmoi — https://chezmoi.io
+install_chezmoi() {
+  command -v chezmoi &>/dev/null && { skip chezmoi; return; }
+  info "Installing chezmoi"
+  sh -c "$(curl -fsLS get.chezmoi.io)" -- -b "$BIN_DIR"
+  success "chezmoi installed"
+}
+
 # zoxide — https://github.com/ajeetdsouza/zoxide
 install_zoxide() {
   command -v zoxide &>/dev/null && { skip zoxide; return; }
@@ -89,6 +97,7 @@ install_ghq() {
   success "ghq installed"
 }
 
+install_chezmoi
 install_zoxide
 install_sheldon
 install_eza

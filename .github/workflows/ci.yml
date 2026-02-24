@@ -57,6 +57,7 @@ jobs:
       - name: Verify extras
         if: runner.os == 'Linux'
         run: |
+          command -v chezmoi
           command -v zoxide
           command -v sheldon
           command -v eza
@@ -68,6 +69,7 @@ jobs:
       - name: Verify Homebrew packages
         if: runner.os == 'macOS'
         run: |
+          command -v chezmoi
           command -v git
           command -v fzf
           command -v rg

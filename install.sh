@@ -21,10 +21,17 @@ if [ ! -f "$PLATFORM_FILE" ]; then
   info "No local repository detected — fetching platform files"
   SCRIPT_DIR=$(mktemp -d)
   BASE="https://raw.githubusercontent.com/tafuru/cmdtools/main"
-  mkdir -p "$SCRIPT_DIR/platform/macos" "$SCRIPT_DIR/platform/linux"
-  curl -sSfL "$BASE/platform/macos/Brewfile"         -o "$SCRIPT_DIR/platform/macos/Brewfile"
-  curl -sSfL "$BASE/platform/linux/packages.txt"     -o "$SCRIPT_DIR/platform/linux/packages.txt"
-  curl -sSfL "$BASE/platform/linux/extras.sh"        -o "$SCRIPT_DIR/platform/linux/extras.sh"
+  case "$OS" in
+    Darwin)
+      mkdir -p "$SCRIPT_DIR/platform/macos"
+      curl -sSfL "$BASE/platform/macos/Brewfile" -o "$SCRIPT_DIR/platform/macos/Brewfile"
+      ;;
+    Linux)
+      mkdir -p "$SCRIPT_DIR/platform/linux"
+      curl -sSfL "$BASE/platform/linux/packages.txt" -o "$SCRIPT_DIR/platform/linux/packages.txt"
+      curl -sSfL "$BASE/platform/linux/extras.sh"    -o "$SCRIPT_DIR/platform/linux/extras.sh"
+      ;;
+  esac
   TMPDIR_CLEANUP=true
 fi
 

@@ -38,7 +38,9 @@ jobs:
 
       - name: Run install.sh (curl mode)
         if: matrix.install-method == 'curl'
-        run: bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/main/install.sh)"
+        run: |
+          BRANCH="${{ github.head_ref || github.ref_name }}"
+          bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"
 
       - name: Add ~/.local/bin to PATH
         if: runner.os == 'Linux'

@@ -20,7 +20,8 @@ esac
 if [ ! -f "$PLATFORM_FILE" ]; then
   info "No local repository detected — fetching platform files"
   SCRIPT_DIR=$(mktemp -d)
-  BASE="https://raw.githubusercontent.com/tafuru/cmdtools/main"
+  BRANCH="${CMDTOOLS_BRANCH:-main}"
+  BASE="https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}"
   case "$OS" in
     Darwin)
       mkdir -p "$SCRIPT_DIR/platform/macos"

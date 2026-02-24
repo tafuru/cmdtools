@@ -38,6 +38,8 @@ jobs:
 
       - name: Run install.sh (curl mode)
         if: matrix.install-method == 'curl'
+        env:
+          CMDTOOLS_BRANCH: ${{ github.head_ref || github.ref_name }}
         run: |
           BRANCH="${{ github.head_ref || github.ref_name }}"
           bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"

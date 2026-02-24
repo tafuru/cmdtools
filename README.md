@@ -8,19 +8,19 @@ CLI tools installer for macOS and Linux.
 
 | Tool | Description |
 |---|---|
-| `git` | Version control |
-| `ghq` | Repository manager |
-| `fzf` | Fuzzy finder |
-| `zoxide` | Smart `cd` |
-| `ripgrep` | Fast grep |
-| `fd` | Fast find |
-| `eza` | Modern `ls` |
-| `bat` | Modern `cat` |
-| `delta` | Git diff viewer |
-| `difi` | Git diff reviewer |
-| `sheldon` | zsh plugin manager |
-| `mise` | Runtime version manager |
-| `neovim` | Text editor |
+| [`git`](https://git-scm.com) | Version control |
+| [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
+| [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
+| [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |
+| [`ripgrep`](https://github.com/BurntSushi/ripgrep) | Fast grep |
+| [`fd`](https://github.com/sharkdp/fd) | Fast find |
+| [`eza`](https://github.com/eza-community/eza) | Modern `ls` |
+| [`bat`](https://github.com/sharkdp/bat) | Modern `cat` |
+| [`delta`](https://github.com/dandavison/delta) | Git diff viewer |
+| [`difi`](https://github.com/oug-t/difi) | Git diff reviewer |
+| [`sheldon`](https://github.com/rossmacarthur/sheldon) | zsh plugin manager |
+| [`mise`](https://mise.jdx.dev) | Runtime version manager |
+| [`neovim`](https://neovim.io) | Text editor |
 
 ## Installation
 

@@ -1,32 +1,14 @@
-# Dotfiles management
-brew "chezmoi"
-
 # Shell
 brew "zsh"
-brew "sheldon"
-brew "starship"
 
 # Core CLI tools
 brew "git"
-brew "ghq"
 brew "fzf"
-brew "zoxide"
 brew "ripgrep"
 brew "fd"
 
 # File viewers
-brew "eza"
 brew "bat"
-
-# Build tools
-brew "mise"
-
-# Git
-brew "delta"
-brew "difi"
 
 # Editor
 brew "neovim"
-
-# Terminal multiplexer
-brew "zellij"

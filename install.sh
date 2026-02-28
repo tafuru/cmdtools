@@ -30,16 +30,17 @@ if [ ! -f "$PLATFORM_FILE" ]; then
   SCRIPT_DIR=$(mktemp -d)
   BRANCH="${CMDTOOLS_BRANCH:-main}"
   BASE="https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}"
+  mkdir -p "$SCRIPT_DIR/platform/common"
+  curl -sSfL "$BASE/platform/common/Brewfile" -o "$SCRIPT_DIR/platform/common/Brewfile"
   case "$OS" in
     Darwin)
       mkdir -p "$SCRIPT_DIR/platform/macos"
       curl -sSfL "$BASE/platform/macos/Brewfile" -o "$SCRIPT_DIR/platform/macos/Brewfile"
       ;;
-  Linux)
-    mkdir -p "$SCRIPT_DIR/platform/linux"
-    curl -sSfL "$BASE/platform/linux/packages.txt" -o "$SCRIPT_DIR/platform/linux/packages.txt"
-    curl -sSfL "$BASE/platform/linux/Brewfile"     -o "$SCRIPT_DIR/platform/linux/Brewfile"
-    ;;
+    Linux)
+      mkdir -p "$SCRIPT_DIR/platform/linux"
+      curl -sSfL "$BASE/platform/linux/packages.txt" -o "$SCRIPT_DIR/platform/linux/packages.txt"
+      ;;
   esac
   TMPDIR_CLEANUP=true
 fi
@@ -52,6 +53,7 @@ case "$OS" in
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
     brew bundle --file "$SCRIPT_DIR/platform/macos/Brewfile"
+    brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
     success "All packages installed"
     ;;
   Linux)
@@ -76,7 +78,7 @@ case "$OS" in
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
-    brew bundle --file "$SCRIPT_DIR/platform/linux/Brewfile"
+    brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
     success "All packages installed"
     ;;
   *)

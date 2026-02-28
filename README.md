@@ -10,6 +10,7 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 |---|---|
 | [`chezmoi`](https://chezmoi.io) | Dotfiles manager |
 | [`git`](https://git-scm.com) | Version control |
+| [`gh`](https://cli.github.com) | GitHub CLI |
 | [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
 | [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
 | [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |
@@ -19,6 +20,7 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 | [`bat`](https://github.com/sharkdp/bat) | Modern `cat` |
 | [`delta`](https://github.com/dandavison/delta) | Git diff viewer |
 | [`difi`](https://github.com/oug-t/difi) | Git diff reviewer |
+| [`starship`](https://starship.rs) | Shell prompt |
 | [`sheldon`](https://github.com/rossmacarthur/sheldon) | zsh plugin manager |
 | [`mise`](https://mise.jdx.dev) | Runtime version manager |
 | [`neovim`](https://neovim.io) | Text editor |
@@ -40,12 +42,12 @@ cd cmdtools
 bash install.sh
 ```
 
-On macOS, packages are installed via Homebrew. On Ubuntu/Debian, apt handles packages available in the standard repositories; the rest are installed from official release binaries to `~/.local/bin`.
+On macOS, packages are installed via Homebrew. On Ubuntu/Debian, apt handles packages available in the standard repositories; the rest are installed via Homebrew (Linuxbrew).
 
 ## Design Principles
 
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
-- Ubuntu/Debian uses apt for standard packages; extras are fetched from official GitHub Releases (no Linuxbrew)
+- Ubuntu/Debian uses apt for standard packages; the rest are installed via Homebrew (Linuxbrew)
 - Use mise (not Homebrew) for runtimes such as Rust, Node.js, Python — mise supports per-project version management via `.mise.toml`
 - mise itself is installed by cmdtools, but runtimes are not — define them in `~/.config/mise/config.toml`; [dev-setup](https://github.com/tafuru/dev-setup) runs `mise install` automatically as the final step, or run it manually if setting up without dev-setup
 

@@ -12,9 +12,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: Run shellcheck
-        run: |
-          shellcheck install.sh
-          shellcheck platform/linux/extras.sh
+        run: shellcheck install.sh
 
   test:
     runs-on: ${{ matrix.os }}
@@ -32,7 +30,7 @@ jobs:
         if: matrix.install-method == 'clone'
         uses: nick-fields/retry@v3
         with:
-          timeout_minutes: 30
+          timeout_minutes: 60
           max_attempts: 5
           command: bash install.sh
 
@@ -42,15 +40,17 @@ jobs:
         env:
           CMDTOOLS_BRANCH: ${{ github.head_ref || github.ref_name }}
         with:
-          timeout_minutes: 30
+          timeout_minutes: 60
           max_attempts: 5
           command: |
             BRANCH="${{ github.head_ref || github.ref_name }}"
             bash -c "$(curl -fsSL https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}/install.sh)"
 
-      - name: Add ~/.local/bin to PATH
+      - name: Add Linuxbrew to PATH
         if: runner.os == 'Linux'
-        run: echo "$HOME/.local/bin" >> "$GITHUB_PATH"
+        run: |
+          echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
+          echo "/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
 
       - name: Verify apt packages
         if: runner.os == 'Linux'
@@ -63,36 +63,28 @@ jobs:
           command -v fzf
           command -v nvim
 
-      - name: Verify extras
-        if: runner.os == 'Linux'
+      - name: Verify brew packages
         run: |
           command -v chezmoi
+          command -v gh
+          command -v ghq
           command -v zoxide
           command -v sheldon
           command -v eza
           command -v mise
           command -v delta
           command -v difi
-          command -v ghq
           command -v zellij
+          command -v starship
 
-      - name: Verify Homebrew packages
+      - name: Verify macOS-only packages
         if: runner.os == 'macOS'
         run: |
-          command -v chezmoi
           command -v git
           command -v fzf
           command -v rg
-          command -v zoxide
-          command -v sheldon
-          command -v eza
           command -v bat
-          command -v delta
-          command -v difi
-          command -v mise
-          command -v ghq
           command -v nvim
-          command -v zellij
 
       - name: Test idempotency (re-run install.sh)
         if: matrix.install-method == 'clone'

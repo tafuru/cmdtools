@@ -6,6 +6,7 @@ brew "sheldon"
 brew "starship"
 
 # Core CLI tools
+brew "gh"
 brew "ghq"
 brew "zoxide"
 

@@ -60,7 +60,6 @@ jobs:
           command -v curl
           command -v wget
           command -v rg
-          command -v fzf
           command -v nvim
 
       - name: Verify brew packages
@@ -68,6 +67,7 @@ jobs:
           command -v chezmoi
           command -v gh
           command -v ghq
+          command -v fzf
           command -v zoxide
           command -v sheldon
           command -v eza
@@ -81,7 +81,6 @@ jobs:
         if: runner.os == 'macOS'
         run: |
           command -v git
-          command -v fzf
           command -v rg
           command -v bat
           command -v nvim

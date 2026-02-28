@@ -3,7 +3,6 @@ brew "zsh"
 
 # Core CLI tools
 brew "git"
-brew "fzf"
 brew "ripgrep"
 brew "fd"
 

@@ -8,7 +8,6 @@ wget
 unzip
 ripgrep
 fd-find
-fzf
 
 # File viewers
 bat

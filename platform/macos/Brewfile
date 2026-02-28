@@ -12,6 +12,3 @@ brew "bat"
 # Editor
 brew "neovim"
 
-# GitHub Copilot CLI
-cask "copilot-cli"
-

@@ -79,6 +79,10 @@ case "$OS" in
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
     brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
+    if ! command -v copilot &>/dev/null; then
+      info "Installing GitHub Copilot CLI"
+      curl -fsSL https://gh.io/copilot-install | bash
+    fi
     success "All packages installed"
     ;;
   *)
@@ -88,13 +92,4 @@ esac
 
 if [ "$TMPDIR_CLEANUP" = true ]; then
   rm -rf "$SCRIPT_DIR"
-fi
-
-# gh extensions
-if command -v gh &>/dev/null; then
-  if ! gh extension list 2>/dev/null | grep -q 'gh-copilot'; then
-    info "Installing gh extension: gh-copilot"
-    gh extension install github/gh-copilot
-    success "gh-copilot installed"
-  fi
 fi

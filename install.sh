@@ -13,7 +13,7 @@ fatal()   { echo "[cmdtools] ✗ $*" >&2; exit 1; }
 if [ "${1:-}" = "--help" ]; then
   echo "Usage: install.sh [--help]"
   echo ""
-  echo "Installs CLI tools for macOS (Homebrew) or Linux (apt + GitHub Releases)."
+  echo "Installs CLI tools for macOS (Homebrew) or Linux (apt + Homebrew)."
   echo "No options required — run directly."
   exit 0
 fi
@@ -35,11 +35,11 @@ if [ ! -f "$PLATFORM_FILE" ]; then
       mkdir -p "$SCRIPT_DIR/platform/macos"
       curl -sSfL "$BASE/platform/macos/Brewfile" -o "$SCRIPT_DIR/platform/macos/Brewfile"
       ;;
-    Linux)
-      mkdir -p "$SCRIPT_DIR/platform/linux"
-      curl -sSfL "$BASE/platform/linux/packages.txt" -o "$SCRIPT_DIR/platform/linux/packages.txt"
-      curl -sSfL "$BASE/platform/linux/extras.sh"    -o "$SCRIPT_DIR/platform/linux/extras.sh"
-      ;;
+  Linux)
+    mkdir -p "$SCRIPT_DIR/platform/linux"
+    curl -sSfL "$BASE/platform/linux/packages.txt" -o "$SCRIPT_DIR/platform/linux/packages.txt"
+    curl -sSfL "$BASE/platform/linux/Brewfile"     -o "$SCRIPT_DIR/platform/linux/Brewfile"
+    ;;
   esac
   TMPDIR_CLEANUP=true
 fi
@@ -71,7 +71,13 @@ case "$OS" in
       sudo chsh -s "$(which zsh)" "$USER"
       success "Default shell set to zsh"
     fi
-    bash "$SCRIPT_DIR/platform/linux/extras.sh"
+    if ! command -v brew &>/dev/null; then
+      info "Homebrew not found — installing"
+      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+    fi
+    brew bundle --file "$SCRIPT_DIR/platform/linux/Brewfile"
+    success "All packages installed"
     ;;
   *)
     fatal "Unsupported OS: $OS"

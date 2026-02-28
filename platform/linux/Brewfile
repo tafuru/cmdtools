@@ -1,0 +1,23 @@
+# Dotfiles management
+brew "chezmoi"
+
+# Shell
+brew "sheldon"
+brew "starship"
+
+# Core CLI tools
+brew "ghq"
+brew "zoxide"
+
+# File viewers
+brew "eza"
+
+# Build tools
+brew "mise"
+
+# Git
+brew "delta"
+brew "difi"
+
+# Terminal multiplexer
+brew "zellij"

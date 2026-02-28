@@ -75,7 +75,7 @@ case "$OS" in
     fi
     if ! command -v brew &>/dev/null; then
       info "Homebrew not found — installing"
-      /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
     brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"

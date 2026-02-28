@@ -89,3 +89,12 @@ esac
 if [ "$TMPDIR_CLEANUP" = true ]; then
   rm -rf "$SCRIPT_DIR"
 fi
+
+# gh extensions
+if command -v gh &>/dev/null; then
+  if ! gh extension list 2>/dev/null | grep -q 'gh-copilot'; then
+    info "Installing gh extension: gh-copilot"
+    gh extension install github/gh-copilot
+    success "gh-copilot installed"
+  fi
+fi

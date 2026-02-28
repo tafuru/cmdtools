@@ -11,6 +11,7 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 | [`chezmoi`](https://chezmoi.io) | Dotfiles manager |
 | [`git`](https://git-scm.com) | Version control |
 | [`gh`](https://cli.github.com) | GitHub CLI |
+| [`gh copilot`](https://github.com/github/gh-copilot) | GitHub Copilot in the CLI |
 | [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
 | [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
 | [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |

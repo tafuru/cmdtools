@@ -76,6 +76,7 @@ jobs:
           command -v difi
           command -v zellij
           command -v starship
+          gh extension list | grep -q 'gh-copilot'
 
       - name: Verify macOS-only packages
         if: runner.os == 'macOS'

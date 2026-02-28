@@ -54,10 +54,6 @@ case "$OS" in
     fi
     brew bundle --file "$SCRIPT_DIR/platform/macos/Brewfile"
     brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
-    if ! command -v copilot &>/dev/null; then
-      info "Installing GitHub Copilot CLI"
-      curl -fsSL https://gh.io/copilot-install | bash
-    fi
     success "All packages installed"
     ;;
   Linux)
@@ -83,10 +79,6 @@ case "$OS" in
       eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
     fi
     brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
-    if ! command -v copilot &>/dev/null; then
-      info "Installing GitHub Copilot CLI"
-      curl -fsSL https://gh.io/copilot-install | bash
-    fi
     success "All packages installed"
     ;;
   *)

@@ -23,3 +23,6 @@ brew "difi"
 
 # Terminal multiplexer
 brew "zellij"
+
+# GitHub Copilot CLI
+cask "copilot-cli"

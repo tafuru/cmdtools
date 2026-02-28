@@ -4,6 +4,7 @@ brew "chezmoi"
 # Shell
 brew "zsh"
 brew "sheldon"
+brew "starship"
 
 # Core CLI tools
 brew "git"

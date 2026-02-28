@@ -126,6 +126,14 @@ install_zellij() {
   success "zellij installed"
 }
 
+# starship — https://github.com/starship/starship
+install_starship() {
+  command -v starship &>/dev/null && { skip starship; return; }
+  info "Installing starship"
+  curl -sSfL https://starship.rs/install.sh | sh -s -- --bin-dir "$BIN_DIR" --yes
+  success "starship installed"
+}
+
 install_chezmoi
 install_zoxide
 install_sheldon
@@ -135,5 +143,6 @@ install_delta
 install_difi
 install_ghq
 install_zellij
+install_starship
 
 success "All extras installed to $BIN_DIR"

@@ -10,5 +10,4 @@ brew "fd"
 brew "bat"
 
 # Editor
-brew "neovim"
 

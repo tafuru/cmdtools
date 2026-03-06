@@ -13,4 +13,3 @@ fd-find
 bat
 
 # Editor
-neovim

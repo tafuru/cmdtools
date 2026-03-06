@@ -24,5 +24,8 @@ brew "difi"
 # Terminal multiplexer
 brew "zellij"
 
+# Editor
+brew "neovim"
+
 # GitHub Copilot CLI
 cask "copilot-cli"

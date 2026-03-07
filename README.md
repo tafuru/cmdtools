@@ -13,6 +13,7 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 | [`gh`](https://cli.github.com) | GitHub CLI |
 | [`copilot`](https://github.com/github/copilot-cli) | GitHub Copilot CLI |
 | [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
+| `specify` | spec-kit CLI |
 | [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
 | [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |
 | [`ripgrep`](https://github.com/BurntSushi/ripgrep) | Fast grep |
@@ -49,6 +50,7 @@ On macOS, packages are installed via Homebrew. On Ubuntu/Debian, apt handles pac
 
 - Installs tools only — configuration lives in [dotfiles](https://github.com/tafuru/dotfiles)
 - Ubuntu/Debian uses apt for standard packages; the rest are installed via Homebrew (Linuxbrew)
+- Package manifests are the source of truth: Homebrew packages live in `platform/common/Brewfile` and `platform/macos/Brewfile`, and Linux apt packages live in `platform/linux/packages.txt`
 - Use mise (not Homebrew) for runtimes such as Rust, Node.js, Python — mise supports per-project version management via `.mise.toml`
 - mise itself is installed by cmdtools, but runtimes are not — define them in `~/.config/mise/config.toml`; [dev-setup](https://github.com/tafuru/dev-setup) runs `mise install` automatically as the final step, or run it manually if setting up without dev-setup
 

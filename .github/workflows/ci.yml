@@ -52,39 +52,60 @@ jobs:
           echo "/home/linuxbrew/.linuxbrew/bin" >> "$GITHUB_PATH"
           echo "/home/linuxbrew/.linuxbrew/sbin" >> "$GITHUB_PATH"
 
+      - name: Prepare package manifests
+        run: |
+          manifest_dir="$RUNNER_TEMP/cmdtools-manifests"
+          rm -rf "$manifest_dir"
+          mkdir -p "$manifest_dir/platform/common"
+
+          if [ "${{ matrix.install-method }}" = "clone" ]; then
+            cp "$GITHUB_WORKSPACE/platform/common/Brewfile" "$manifest_dir/platform/common/Brewfile"
+
+            if [ -f "$GITHUB_WORKSPACE/platform/linux/packages.txt" ]; then
+              mkdir -p "$manifest_dir/platform/linux"
+              cp "$GITHUB_WORKSPACE/platform/linux/packages.txt" "$manifest_dir/platform/linux/packages.txt"
+            fi
+
+            if [ -f "$GITHUB_WORKSPACE/platform/macos/Brewfile" ]; then
+              mkdir -p "$manifest_dir/platform/macos"
+              cp "$GITHUB_WORKSPACE/platform/macos/Brewfile" "$manifest_dir/platform/macos/Brewfile"
+            fi
+          else
+            BRANCH="${{ github.head_ref || github.ref_name }}"
+            BASE="https://raw.githubusercontent.com/tafuru/cmdtools/${BRANCH}"
+
+            curl -fsSL "$BASE/platform/common/Brewfile" -o "$manifest_dir/platform/common/Brewfile"
+
+            if [ "$RUNNER_OS" = "Linux" ]; then
+              mkdir -p "$manifest_dir/platform/linux"
+              curl -fsSL "$BASE/platform/linux/packages.txt" -o "$manifest_dir/platform/linux/packages.txt"
+            fi
+
+            if [ "$RUNNER_OS" = "macOS" ]; then
+              mkdir -p "$manifest_dir/platform/macos"
+              curl -fsSL "$BASE/platform/macos/Brewfile" -o "$manifest_dir/platform/macos/Brewfile"
+            fi
+          fi
+
+          echo "CMDTOOLS_MANIFEST_DIR=$manifest_dir" >> "$GITHUB_ENV"
+
       - name: Verify apt packages
         if: runner.os == 'Linux'
         run: |
-          command -v zsh
-          command -v git
-          command -v curl
-          command -v wget
-          command -v rg
-          command -v nvim
+          while IFS= read -r pkg; do
+            [[ -z "$pkg" || "$pkg" == \#* ]] && continue
+            dpkg -s "$pkg" >/dev/null 2>&1 || {
+              echo "Missing apt package: $pkg"
+              exit 1
+            }
+          done < "$CMDTOOLS_MANIFEST_DIR/platform/linux/packages.txt"
 
       - name: Verify brew packages
         run: |
-          command -v chezmoi
-          command -v gh
-          command -v ghq
-          command -v fzf
-          command -v zoxide
-          command -v sheldon
-          command -v eza
-          command -v mise
-          command -v delta
-          command -v difi
-          command -v zellij
-          command -v starship
-          command -v copilot
-
-      - name: Verify macOS-only packages
-        if: runner.os == 'macOS'
-        run: |
-          command -v git
-          command -v rg
-          command -v bat
-          command -v nvim
+          brew bundle check --file "$CMDTOOLS_MANIFEST_DIR/platform/common/Brewfile"
+          if [ "$RUNNER_OS" = "macOS" ]; then
+            brew bundle check --file "$CMDTOOLS_MANIFEST_DIR/platform/macos/Brewfile"
+          fi
 
       - name: Test idempotency (re-run install.sh)
         if: matrix.install-method == 'clone'

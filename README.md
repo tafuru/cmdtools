@@ -8,25 +8,25 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 
 | Tool | Description |
 |---|---|
-| [`chezmoi`](https://chezmoi.io) | Dotfiles manager |
-| [`git`](https://git-scm.com) | Version control |
-| [`gh`](https://cli.github.com) | GitHub CLI |
-| [`copilot`](https://github.com/github/copilot-cli) | GitHub Copilot CLI |
-| [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
-| [Spec Kit](https://github.github.com/spec-kit/) | Toolkit for spec-driven feature planning and implementation |
-| [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
-| [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |
-| [`ripgrep`](https://github.com/BurntSushi/ripgrep) | Fast grep |
-| [`fd`](https://github.com/sharkdp/fd) | Fast find |
-| [`eza`](https://github.com/eza-community/eza) | Modern `ls` |
-| [`bat`](https://github.com/sharkdp/bat) | Modern `cat` |
-| [`delta`](https://github.com/dandavison/delta) | Git diff viewer |
-| [`difi`](https://github.com/oug-t/difi) | Git diff reviewer |
-| [`starship`](https://starship.rs) | Shell prompt |
-| [`sheldon`](https://github.com/rossmacarthur/sheldon) | zsh plugin manager |
-| [`mise`](https://mise.jdx.dev) | Runtime version manager |
-| [`neovim`](https://neovim.io) | Text editor |
-| [`zellij`](https://zellij.dev) | Terminal multiplexer |
+| [`chezmoi`](https://chezmoi.io) | Manages dotfiles across machines using templates and a source-of-truth repository |
+| [`git`](https://git-scm.com) | Distributed version control for tracking changes and collaborating on code |
+| [`gh`](https://cli.github.com) | GitHub CLI for managing issues, pull requests, and workflows from the terminal |
+| [`copilot`](https://github.com/github/copilot-cli) | AI-powered pair programmer that brings Copilot assistance to the command line |
+| [`ghq`](https://github.com/x-motemen/ghq) | Repository manager that clones and organizes repos under a consistent directory structure |
+| [`specify`](https://github.github.com/spec-kit/) | Spec-driven development tool for structuring and implementing features from specifications |
+| [`fzf`](https://github.com/junegunn/fzf) | General-purpose fuzzy finder for interactive filtering of any command output or list |
+| [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smarter `cd` that learns your most-visited directories and jumps to them instantly |
+| [`ripgrep`](https://github.com/BurntSushi/ripgrep) | Blazing-fast recursive search that respects `.gitignore` and supports regex |
+| [`fd`](https://github.com/sharkdp/fd) | Fast and intuitive alternative to `find` with colorized output and smart defaults |
+| [`eza`](https://github.com/eza-community/eza) | Modern `ls` replacement with color, icons, and built-in Git status support |
+| [`bat`](https://github.com/sharkdp/bat) | `cat` clone with syntax highlighting, line numbers, and Git change markers |
+| [`delta`](https://github.com/dandavison/delta) | Syntax-highlighting pager for `git diff` and `git show` output |
+| [`difi`](https://github.com/oug-t/difi) | Interactive git diff reviewer that walks through hunks one at a time |
+| [`starship`](https://starship.rs) | Minimal, fast, and customizable shell prompt that works with any shell |
+| [`sheldon`](https://github.com/rossmacarthur/sheldon) | Fast zsh plugin manager with TOML-based configuration |
+| [`mise`](https://mise.jdx.dev) | Polyglot runtime version manager replacing nvm, rbenv, and pyenv with per-project `.mise.toml` |
+| [`neovim`](https://neovim.io) | Hyperextensible Vim-based text editor with built-in LSP and Lua configuration |
+| [`zellij`](https://zellij.dev) | Terminal workspace and multiplexer with a built-in plugin system and floating panes |
 
 ## Installation
 

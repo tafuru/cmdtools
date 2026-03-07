@@ -13,7 +13,7 @@ CLI tools installer for macOS and Ubuntu/Debian. Sets up a zsh environment with 
 | [`gh`](https://cli.github.com) | GitHub CLI |
 | [`copilot`](https://github.com/github/copilot-cli) | GitHub Copilot CLI |
 | [`ghq`](https://github.com/x-motemen/ghq) | Repository manager |
-| `specify` | spec-kit CLI |
+| [Spec Kit](https://github.github.com/spec-kit/) | Toolkit for spec-driven feature planning and implementation |
 | [`fzf`](https://github.com/junegunn/fzf) | Fuzzy finder |
 | [`zoxide`](https://github.com/ajeetdsouza/zoxide) | Smart `cd` |
 | [`ripgrep`](https://github.com/BurntSushi/ripgrep) | Fast grep |

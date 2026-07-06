@@ -52,6 +52,9 @@ case "$OS" in
       info "Homebrew not found — installing"
       /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
     fi
+    # aws/tap is not an official Homebrew tap, so it must be explicitly
+    # trusted before `brew bundle` is allowed to load formulae/casks from it.
+    brew trust --tap aws/tap &>/dev/null || true
     brew bundle --file "$SCRIPT_DIR/platform/macos/Brewfile"
     brew bundle --file "$SCRIPT_DIR/platform/common/Brewfile"
     success "All packages installed"

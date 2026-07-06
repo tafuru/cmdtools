@@ -29,4 +29,5 @@ brew "zellij"
 brew "neovim"
 
 # GitHub Copilot CLI
+tap "aws/tap"
 cask "copilot-cli"
